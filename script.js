@@ -2,7 +2,7 @@
 //  NAME MEANING DATABASE
 // ================================================================
 const nameMeanings = {
-    // --- African / Nguni ---
+    // African / Nguni
     "tsandzile": {
         meaning: "One who brings hope and renewal",
         culture: "Swati / Nguni",
@@ -39,7 +39,7 @@ const nameMeanings = {
         feminine: "A woman of great expectation and promise",
         masculine: "One whose arrival brings new hope"
     },
-    // --- European / Biblical ---
+    // European / Biblical
     "daniel": {
         meaning: "God is my judge",
         culture: "Hebrew / Biblical",
@@ -76,6 +76,7 @@ const nameMeanings = {
         feminine: "A woman of steadfast faith and purpose",
         masculine: "A man devoted to truth and honour"
     },
+    // Additional
     "taylor": {
         meaning: "Tailor / one who cuts cloth",
         culture: "English / Old French",
@@ -97,9 +98,8 @@ const nameMeanings = {
 };
 
 // ================================================================
-//  HELPER FUNCTIONS
+//  HELPERS
 // ================================================================
-
 function getGender() {
     return document.querySelector('input[name="gender"]:checked').value;
 }
@@ -111,7 +111,6 @@ function getBirthDate() {
 // ================================================================
 //  LIFE PATH NUMBER
 // ================================================================
-
 function calculateLifePathNumber(birthDateStr) {
     if (!birthDateStr) return null;
     const digits = birthDateStr.replace(/-/g, '').split('').map(Number);
@@ -140,9 +139,8 @@ function getLifePathDescription(number) {
 }
 
 // ================================================================
-//  🪐 STAR SIGN CALCULATOR
+//  STAR SIGN
 // ================================================================
-
 function getStarSign(birthDateStr) {
     if (!birthDateStr) return null;
     const parts = birthDateStr.split('-');
@@ -170,7 +168,6 @@ function getStarSign(birthDateStr) {
         let endMonth = sign.end[0];
         let endDay = sign.end[1];
 
-        // Capricorn special case (crosses year boundary)
         if (startMonth === 12 && endMonth === 1) {
             if ((month === 12 && day >= startDay) || (month === 1 && day <= endDay)) {
                 return sign.name;
@@ -181,7 +178,7 @@ function getStarSign(birthDateStr) {
             }
         }
     }
-    return "♈ Aries"; // fallback
+    return "♈ Aries";
 }
 
 function getStarSignDescription(sign) {
@@ -203,9 +200,8 @@ function getStarSignDescription(sign) {
 }
 
 // ================================================================
-//  NAME LOOKUP (local database)
+//  NAME LOOKUP
 // ================================================================
-
 function lookupName(namePart) {
     const key = namePart.toLowerCase();
     if (nameMeanings[key]) {
@@ -230,10 +226,8 @@ function lookupName(namePart) {
 }
 
 // ================================================================
-//  AI CALL (via Google Apps Script proxy)
+//  AI CALL
 // ================================================================
-
-// ✅ Your web app URL
 const proxyUrl = "https://script.google.com/macros/s/AKfycby85853OfythS_HnXDZwF1FHlo0pnyyzIXhYw45RTJp-f-L4Fxtnp-spPBBrPj8agL1/exec";
 
 async function callAI(prompt) {
@@ -253,13 +247,12 @@ async function callAI(prompt) {
 }
 
 // ================================================================
-//  GENERATE DIVINE SENTENCE
+//  DIVINE SENTENCE
 // ================================================================
-
 function generateDivineSentence(fullName, gender, lifePathNum, starSign) {
     const first = fullName.split(/\s+/)[0];
     const genderWord = (gender === 'female') ? 'woman' : 'man';
-    let sentence = `✨ Divine Oracle for ${first}: ✨\n`;
+    let sentence = `⟡ Aurelius speaks for ${first}: ⟡\n`;
     sentence += `You are a ${genderWord} of powerful names. `;
     if (lifePathNum) {
         sentence += `Your Life Path Number ${lifePathNum} reveals a destiny of ${getLifePathDescription(lifePathNum).split('–')[0]}. `;
@@ -267,20 +260,19 @@ function generateDivineSentence(fullName, gender, lifePathNum, starSign) {
     if (starSign) {
         sentence += `As a ${starSign}, you carry the energy of ${getStarSignDescription(starSign).split('.')[0]}. `;
     }
-    sentence += `The universe guides your steps. Walk boldly, for your ancestors sing your name. 🌙`;
+    sentence += `Walk with purpose, for your ancestors sing your name. ✦`;
     return sentence;
 }
 
 // ================================================================
-//  MAIN FUNCTION – called when user clicks "REVEAL MY PATH"
+//  REVEAL PATH
 // ================================================================
-
 async function revealPath() {
     const fullName = document.getElementById('fullName').value.trim();
     const resultDiv = document.getElementById('result');
 
     if (!fullName) {
-        resultDiv.innerHTML = "<p style='color: #ff8888;'>🌟 Please enter your full name, brave soul.</p>";
+        resultDiv.innerHTML = `<p style="color: #b8963b; letter-spacing: 2px;">✦ Please enter your full name, brave soul. ✦</p>`;
         return;
     }
 
@@ -291,8 +283,7 @@ async function revealPath() {
 
     const nameParts = fullName.split(/\s+/);
 
-    // 1. Build name meanings
-    let meaningsHtml = `<div class="name-meaning"><strong>📜 Name Meanings:</strong>`;
+    let meaningsHtml = `<div class="name-meaning"><strong>✦ Name Meanings</strong>`;
     let aiFallback = false;
 
     for (let part of nameParts) {
@@ -307,46 +298,42 @@ async function revealPath() {
         meaningsHtml += `
             <div class="name-part">
                 <strong>${part}</strong> (${meaningObj.culture || "Spirit"}) – ${meaningObj.meaning || "A name of great mystery and power"}<br>
-                <span style="font-size:0.9em; color:#FFD9A0;">✦ ${genderNote}</span>
+                <span style="font-size:0.85em; color:#b8963b;">✦ ${genderNote}</span>
             </div>
         `;
     }
     meaningsHtml += `</div>`;
 
-    // 2. Life Path Number + Star Sign
     let lifePathHtml = '';
     if (lifePathNum && starSign) {
         lifePathHtml = `
             <div class="life-path">
-                🔢 Life Path Number: ${lifePathNum} – ${getLifePathDescription(lifePathNum)}<br>
-                🪐 Star Sign: ${starSign} – ${getStarSignDescription(starSign)}
+                ◆ Life Path Number ${lifePathNum} – ${getLifePathDescription(lifePathNum)}<br>
+                ◆ Star Sign: ${starSign} – ${getStarSignDescription(starSign)}
             </div>
         `;
     } else if (lifePathNum) {
         lifePathHtml = `
             <div class="life-path">
-                🔢 Life Path Number: ${lifePathNum} – ${getLifePathDescription(lifePathNum)}
+                ◆ Life Path Number ${lifePathNum} – ${getLifePathDescription(lifePathNum)}
             </div>
         `;
     } else if (starSign) {
         lifePathHtml = `
             <div class="life-path">
-                🪐 Star Sign: ${starSign} – ${getStarSignDescription(starSign)}
+                ◆ Star Sign: ${starSign} – ${getStarSignDescription(starSign)}
             </div>
         `;
     } else {
         lifePathHtml = `
             <div class="life-path">
-                ✨ No birth date entered – your path is written in your choices.
-                <br><small>Add your birth date to reveal your Life Path Number &amp; Star Sign.</small>
+                ✦ Add your birth date to reveal your Life Path Number &amp; Star Sign. ✦
             </div>
         `;
     }
 
-    // 3. Divine sentence
     let divineMsg = generateDivineSentence(fullName, gender, lifePathNum, starSign);
 
-    // 4. AI enhancement
     let aiMessage = '';
     if (aiFallback) {
         const aiPrompt = `
@@ -360,28 +347,22 @@ async function revealPath() {
         const aiResponse = await callAI(aiPrompt);
         if (aiResponse && !aiResponse.includes("trouble connecting")) {
             aiMessage = `
-                <div class="divine-sentence" style="border-left-color: #FFD9A0;">
-                    🌀 <strong>Spirit speaks:</strong><br>
+                <div class="divine-sentence" style="border-top: 1px solid rgba(212,175,55,0.08); margin-top:12px; padding-top:16px;">
                     ${aiResponse}
                 </div>
             `;
         }
     }
 
-    // 5. Display final result
     resultDiv.innerHTML = `
-        <h3>🦋 ${fullName.toUpperCase()} 🦋</h3>
+        <h3>✦ ${fullName.toUpperCase()} ✦</h3>
         ${meaningsHtml}
         ${lifePathHtml}
         <div class="divine-sentence">${divineMsg.replace(/\n/g, '<br>')}</div>
         ${aiMessage}
-        <p style="margin-top: 15px; color: #FFD700;">🐆 The panther spirit watches over you. 🐆</p>
+        <p style="margin-top: 18px; color: #555; letter-spacing: 2px; font-size: 0.85em;">🐆 The panther spirit watches over you. 🐆</p>
     `;
 }
-
-// ================================================================
-//  ENTER KEY SUPPORT
-// ================================================================
 
 document.getElementById('fullName').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
