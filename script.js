@@ -1,67 +1,8 @@
 // ================================================================
-//  NAME MEANING DATABASE + HELPER FUNCTIONS
+//  MAIN SCRIPT – DO NOT EDIT BELOW
 // ================================================================
 
-// --- Name database (only essential names) ---
-const nameMeanings = {
-    "tsandzile": {
-        meaning: "One who brings hope and renewal",
-        culture: "Swati / Nguni",
-        feminine: "A woman who rebuilds communities with grace",
-        masculine: "A man who restores hope and unity"
-    },
-    "xaviera": {
-        meaning: "Bright, splendid, new home",
-        culture: "Basque / Spanish",
-        feminine: "A luminous leader who opens doors for others",
-        masculine: "A radiant man who brings light and clarity"
-    },
-    "moloi": {
-        meaning: "Ancestral healer and keeper of traditions",
-        culture: "Sotho / Tswana",
-        feminine: "A woman of deep spiritual wisdom and healing",
-        masculine: "A man who carries ancestral knowledge forward"
-    },
-    "mtetwa": {
-        meaning: "Descendant of the royal lineage",
-        culture: "Zulu / Swati",
-        feminine: "A queen who rules with compassion and strength",
-        masculine: "A king who leads with honour and courage"
-    },
-    "thabo": {
-        meaning: "Joy and happiness",
-        culture: "Sotho / Nguni",
-        feminine: "A woman who brings happiness wherever she goes",
-        masculine: "A man whose presence fills the room with joy"
-    },
-    "lindiwe": {
-        meaning: "She has been awaited",
-        culture: "Zulu / Nguni",
-        feminine: "A woman of great expectation and promise",
-        masculine: "One whose arrival brings new hope"
-    },
-    // Add more names as you like...
-    "daniel": {
-        meaning: "God is my judge",
-        culture: "Hebrew / Biblical",
-        feminine: "A woman of faith, wisdom, and unwavering strength",
-        masculine: "A man of integrity, courage, and divine protection"
-    },
-    "danielle": {
-        meaning: "God is my judge",
-        culture: "Hebrew / Biblical",
-        feminine: "A woman of grace, intelligence, and divine favour",
-        masculine: "A man who stands firm in truth and justice"
-    },
-    "sarah": {
-        meaning: "Princess / noblewoman",
-        culture: "Hebrew",
-        feminine: "A woman of royal dignity and quiet strength",
-        masculine: "A man who honours and protects those around him"
-    }
-};
-
-// --- Helper functions ---
+// Get gender and birth date from form
 function getGender() {
     return document.querySelector('input[name="gender"]:checked').value;
 }
@@ -70,7 +11,7 @@ function getBirthDate() {
     return document.getElementById('birthDate').value;
 }
 
-// --- Life Path Number ---
+// Life Path Number
 function calculateLifePathNumber(birthDateStr) {
     if (!birthDateStr) return null;
     const digits = birthDateStr.replace(/-/g, '').split('').map(Number);
@@ -98,7 +39,7 @@ function getLifePathDescription(number) {
     return descriptions[number] || "A unique soul on a sacred journey.";
 }
 
-// --- Star Sign ---
+// Star Sign
 function getStarSign(birthDateStr) {
     if (!birthDateStr) return null;
     const parts = birthDateStr.split('-');
@@ -157,9 +98,7 @@ function getStarSignDescription(sign) {
     return descriptions[sign] || "A soul born under the stars.";
 }
 
-// ================================================================
-//  AI CALL
-// ================================================================
+// AI Call (Your Google Apps Script proxy)
 const proxyUrl = "https://script.google.com/macros/s/AKfycby85853OfythS_HnXDZwF1FHlo0pnyyzIXhYw45RTJp-f-L4Fxtnp-spPBBrPj8agL1/exec";
 
 async function callAI(prompt) {
@@ -178,12 +117,10 @@ async function callAI(prompt) {
     }
 }
 
-// ================================================================
-//  LOOKUP & GENERATE FUNCTIONS
-// ================================================================
+// Lookup name (local database + fallback)
 function lookupName(namePart) {
     const key = namePart.toLowerCase();
-    if (nameMeanings[key]) {
+    if (typeof nameMeanings !== 'undefined' && nameMeanings[key]) {
         return nameMeanings[key];
     }
     const firstLetter = key.charAt(0).toUpperCase();
@@ -219,9 +156,7 @@ function generateDivineSentence(fullName, gender, lifePathNum, starSign) {
     return sentence;
 }
 
-// ================================================================
-//  REVEAL PATH
-// ================================================================
+// REVEAL PATH – Main Function
 async function revealPath() {
     const fullName = document.getElementById('fullName').value.trim();
     const resultDiv = document.getElementById('result');
