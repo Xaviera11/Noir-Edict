@@ -1,17 +1,55 @@
 /* ===== Base ===== */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Cinzel', serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+    background: radial-gradient(ellipse at 50% 30%, #1a0a2e 0%, #0c0c0c 50%, #000000 100%);
     color: #FFD700;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
 }
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+}
+
+/* ===== Galaxy Stars Background ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 10% 20%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 30% 60%, #ffffff 1.5px, transparent 2.5px),
+        radial-gradient(circle at 50% 10%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 70% 40%, #ffffff 2px, transparent 3px),
+        radial-gradient(circle at 90% 70%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 20% 80%, #ffffff 1.5px, transparent 2.5px),
+        radial-gradient(circle at 60% 90%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 80% 15%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 40% 50%, #ffffff 1px, transparent 2px),
+        radial-gradient(circle at 95% 50%, #ffffff 1px, transparent 2px);
+    background-size: 300px 300px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+/* Extra planets */
+body::after {
+    content: '🪐✨🌙';
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    font-size: 40px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* ===== Header ===== */
@@ -24,15 +62,25 @@ header {
     display: inline-block;
 }
 h1 {
-    font-size: 3.5em;
+    font-family: 'Cinzel', serif;
+    font-size: 3.8em;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 8px;
     margin: 0;
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
-    background: linear-gradient(45deg, #FFD700, #FFFFFF, #FFD700);
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.2);
+    background: linear-gradient(45deg, #FFD700, #FFF4A0, #FFD700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+.tagline {
+    color: #FFD700;
+    font-family: 'Cinzel', serif;
+    font-size: 1em;
+    letter-spacing: 4px;
+    opacity: 0.8;
+    margin-top: 5px;
 }
 .leopard-spots {
     position: absolute;
@@ -41,11 +89,12 @@ h1 {
     width: 60px;
     height: 60px;
     background:
-        radial-gradient(circle at 30% 30%, #ffffff 4px, transparent 5px),
-        radial-gradient(circle at 70% 50%, #ffffff 4px, transparent 5px),
-        radial-gradient(circle at 40% 70%, #ffffff 4px, transparent 5px);
+        radial-gradient(circle at 30% 30%, #FFD700 4px, transparent 5px),
+        radial-gradient(circle at 70% 50%, #FFD700 4px, transparent 5px),
+        radial-gradient(circle at 40% 70%, #FFD700 4px, transparent 5px);
     background-color: transparent;
     transform: rotate(45deg);
+    opacity: 0.6;
 }
 
 /* ===== Hero Section ===== */
@@ -63,43 +112,42 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-.lady-panther {
-    width: 300px;
-    height: 400px;
-    background: linear-gradient(45deg, #000000, #2d2d2d);
-    border: 4px solid #FFD700;
-    border-radius: 20px;
+
+/* ===== Black Panther (facing you) ===== */
+.black-panther {
+    width: 280px;
+    height: 380px;
+    background: radial-gradient(ellipse at 50% 60%, #1a1a1a, #000000);
+    border: 3px solid #FFD700;
+    border-radius: 50% 50% 30% 30% / 60% 60% 20% 20%;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.15), inset 0 0 60px rgba(255, 215, 0, 0.05);
 }
-.lady-panther::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(circle at 20% 20%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 60% 40%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 30% 70%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 80% 20%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 40% 60%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 70% 80%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 10% 50%, #ffffff 6px, transparent 7px);
-    background-size: 50px 50px;
-    opacity: 0.3;
-    mix-blend-mode: overlay;
-}
-.lady-panther::after {
+
+/* Panther face silhouette */
+.black-panther::before {
     content: '🐆';
-    font-size: 80px;
+    font-size: 120px;
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+    filter: brightness(0.3) drop-shadow(0 0 20px #FFD700);
+    opacity: 0.9;
+}
+
+/* Glowing eyes */
+.black-panther::after {
+    content: '👁️👁️';
+    font-size: 40px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    text-shadow: 0 0 20px #FFD700;
+    letter-spacing: 30px;
+    filter: drop-shadow(0 0 20px #FFD700);
+    opacity: 0.7;
 }
 
 /* ===== Search ===== */
@@ -108,9 +156,10 @@ h1 {
     text-align: center;
 }
 .search-container h2 {
+    font-family: 'Cinzel', serif;
     font-size: 2em;
     margin-bottom: 30px;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 .search-box {
     display: flex;
@@ -123,12 +172,13 @@ h1 {
 input[type="text"] {
     padding: 18px 25px;
     font-size: 18px;
-    border: 3px solid #FFD700;
-    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #FFD700;
+    background: rgba(0, 0, 0, 0.85);
     color: #FFD700;
     border-radius: 12px;
     width: 300px;
     text-align: center;
+    font-family: 'Cinzel', serif;
 }
 input[type="text"]::placeholder {
     color: #888;
@@ -139,9 +189,10 @@ input[type="text"]::placeholder {
     display: flex;
     gap: 30px;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     padding: 12px 20px;
     border-radius: 30px;
+    border: 1px solid #FFD70044;
 }
 .gender-select label {
     color: #FFD700;
@@ -154,13 +205,14 @@ input[type="text"]::placeholder {
 
 .birthdate input {
     padding: 12px 18px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     border: 2px solid #FFD700;
     border-radius: 30px;
     color: #FFD700;
     font-size: 1em;
     width: 220px;
     text-align: center;
+    font-family: 'Cinzel', serif;
 }
 .birthdate small {
     display: block;
@@ -173,7 +225,8 @@ button {
     padding: 18px 40px;
     font-size: 18px;
     font-weight: bold;
-    background: linear-gradient(45deg, #FFD700, #FFFFFF);
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(45deg, #FFD700, #FFF4A0);
     color: #000;
     border: none;
     border-radius: 12px;
@@ -181,15 +234,16 @@ button {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
 }
 
 /* ===== Result ===== */
 .result-box {
-    background: rgba(255, 215, 0, 0.08);
+    background: rgba(0, 0, 0, 0.7);
     border: 2px solid #FFD700;
     border-radius: 15px;
     padding: 25px;
@@ -197,9 +251,10 @@ button:hover {
     text-align: center;
     min-height: 100px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.08);
 }
 .result-box h3 {
+    font-family: 'Cinzel', serif;
     margin-top: 0;
     color: #FFD700;
     font-size: 1.8em;
@@ -208,7 +263,7 @@ button:hover {
     padding-bottom: 5px;
 }
 .name-meaning {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     padding: 15px;
     border-radius: 15px;
     margin: 15px 0;
@@ -219,11 +274,19 @@ button:hover {
     font-size: 1em;
 }
 .life-path {
-    background: rgba(255, 215, 0, 0.15);
+    background: rgba(255, 215, 0, 0.12);
     padding: 12px;
     border-radius: 12px;
     margin: 12px 0;
     font-weight: bold;
+    border-left: 3px solid #FFD700;
+}
+.star-sign {
+    background: rgba(255, 215, 0, 0.08);
+    padding: 10px;
+    border-radius: 12px;
+    margin: 10px 0;
+    font-size: 1.1em;
 }
 .divine-sentence {
     font-size: 1.2em;
@@ -233,6 +296,7 @@ button:hover {
     border-radius: 20px;
     margin-top: 15px;
     border-left: 4px solid #FFD700;
+    font-family: 'Cinzel', serif;
 }
 
 /* ===== Footer ===== */
@@ -242,30 +306,12 @@ footer {
     padding: 20px;
 }
 footer p {
+    font-family: 'Cinzel', serif;
     font-style: italic;
     color: #FFD700;
     font-size: 18px;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-/* ===== Stars Background ===== */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 20% 20%, #ffffff 1px, transparent 2px),
-        radial-gradient(circle at 60% 40%, #ffffff 1px, transparent 2px),
-        radial-gradient(circle at 30% 70%, #ffffff 1px, transparent 2px),
-        radial-gradient(circle at 80% 20%, #ffffff 1px, transparent 2px),
-        radial-gradient(circle at 40% 60%, #ffffff 1px, transparent 2px);
-    background-size: 300px 300px;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.3;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
 }
 
 /* ===== Responsive ===== */
@@ -274,9 +320,9 @@ body::before {
         flex-direction: column;
         gap: 30px;
     }
-    .lady-panther {
-        width: 250px;
-        height: 350px;
+    .black-panther {
+        width: 200px;
+        height: 280px;
     }
     h1 {
         font-size: 2.5em;
@@ -286,8 +332,8 @@ body::before {
     input[type="text"] {
         width: 250px;
     }
-    .lady-panther {
-        width: 200px;
-        height: 300px;
+    .black-panther {
+        width: 160px;
+        height: 220px;
     }
 }
