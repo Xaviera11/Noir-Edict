@@ -108,7 +108,7 @@ h1:hover {
     padding: 20px 0 40px;
 }
 
-/* ===== Panther ===== */
+/* ===== Panther Box ===== */
 .character {
     flex: 0 0 280px;
     display: flex;
@@ -133,23 +133,44 @@ h1:hover {
     box-shadow: 0 0 100px rgba(212, 175, 55, 0.06), inset 0 0 80px rgba(212, 175, 55, 0.04);
 }
 
+/* ===== Mystical Panther Face (SVG) ===== */
 .aurelius-panther::before {
-    content: '🐆';
-    font-size: 110px;
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scaleX(-1);
-    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.10));
-    opacity: 0.85;
-    transition: opacity 0.5s ease, transform 0.6s ease;
+    width: 120px;
+    height: 120px;
+    background: url('images/panther-icon.svg') no-repeat center;
+    background-size: contain;
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+    opacity: 0.9;
+    transition: all 0.6s ease;
+    /* ✨ Mystical Glow Animation ✨ */
+    animation: mysticGlow 3s ease-in-out infinite alternate;
 }
 
+/* ✨ The Animation Itself ✨ */
+@keyframes mysticGlow {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2)) brightness(0.9);
+        transform: translate(-50%, -50%) scaleX(-1) scale(1);
+    }
+    100% {
+        filter: drop-shadow(0 0 60px rgba(212, 175, 55, 0.7)) brightness(1.2);
+        transform: translate(-50%, -50%) scaleX(-1) scale(1.05);
+    }
+}
+
+/* Hover Effect for Extra Magic */
 .aurelius-panther:hover::before {
-    opacity: 1;
-    transform: translate(-50%, -50%) scaleX(-1) scale(1.02);
+    animation-duration: 1.5s;
+    filter: drop-shadow(0 0 80px rgba(212, 175, 55, 0.9)) brightness(1.3);
+    transform: translate(-50%, -50%) scaleX(-1) scale(1.1);
 }
 
+/* ===== Bottom gradient glow ===== */
 .aurelius-panther::after {
     content: '';
     position: absolute;
@@ -383,7 +404,8 @@ footer p {
         height: 280px;
     }
     .aurelius-panther::before {
-        font-size: 80px;
+        width: 80px;
+        height: 80px;
     }
     .search-container {
         max-width: 100%;
@@ -417,7 +439,8 @@ footer p {
         height: 210px;
     }
     .aurelius-panther::before {
-        font-size: 60px;
+        width: 60px;
+        height: 60px;
     }
     .gender-select {
         gap: 20px;
