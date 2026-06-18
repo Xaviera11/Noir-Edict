@@ -175,7 +175,7 @@ function lookupName(namePart) {
 //  AI CALL (via Google Apps Script proxy)
 // ================================================================
 
-// 🔁 REPLACE THIS URL WITH YOUR ACTUAL WEB APP URL
+// ✅ Your web app URL
 const proxyUrl = "https://script.google.com/macros/s/AKfycby85853OfythS_HnXDZwF1FHlo0pnyyzIXhYw45RTJp-f-L4Fxtnp-spPBBrPj8agL1/exec";
 
 async function callAI(prompt) {
