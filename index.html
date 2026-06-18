@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noir-Edict – Name & Destiny Oracle</title>
+    <title>Aurelius – Name & Destiny Oracle</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Google Font: Cinzel (divine, mystical) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts: Cinzel + Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo">
-                <h1>NOIR-EDICT</h1>
-                <!-- Black panther silhouette (facing left, sleek) -->
-                <div class="panther-silhouette"></div>
+                <h1>AURELIUS</h1>
+                <div class="panther-mark"></div>
             </div>
             <p class="tagline">Unlock the meaning, origin &amp; destiny of your name</p>
         </header>
 
         <main>
             <div class="hero-section">
-                <!-- Character / mascot: Black Panther facing user -->
+                <!-- Sleek Panther -->
                 <div class="character">
-                    <div class="black-panther"></div>
+                    <div class="aurelius-panther"></div>
                 </div>
 
-                <!-- Search area -->
+                <!-- Search -->
                 <div class="search-container">
                     <h2>🐾 What's Your True Name?</h2>
                     <div class="search-box">
@@ -35,24 +34,24 @@
                         <div class="gender-select">
                             <label>
                                 <input type="radio" name="gender" value="female" checked />
-                                🧡 Female
+                                ✦ Female
                             </label>
                             <label>
                                 <input type="radio" name="gender" value="male" />
-                                💙 Male
+                                ✦ Male
                             </label>
                         </div>
 
                         <div class="birthdate">
                             <input type="date" id="birthDate" />
-                            <small>Optional – adds Life Path Number &amp; Star Sign</small>
+                            <small>Optional – Life Path Number &amp; Star Sign</small>
                         </div>
 
-                        <button onclick="revealPath()">🔮 REVEAL MY PATH</button>
+                        <button onclick="revealPath()">⟡ REVEAL YOUR PATH</button>
                     </div>
 
                     <div id="result" class="result-box">
-                        <p style="color: #aaa; font-style: italic;">
+                        <p class="placeholder">
                             Your divine reading will appear here.
                         </p>
                     </div>
@@ -61,7 +60,7 @@
         </main>
 
         <footer>
-            <p>🐆 Your name is your first gift – let it speak your destiny 🐆</p>
+            <p>⟡ Your name is your first gift – let it speak your destiny ⟡</p>
         </footer>
     </div>
 
