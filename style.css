@@ -1,7 +1,7 @@
 /* ===== Import Fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
-/* ===== Base ===== */
+/* ===== Reset ===== */
 * {
     margin: 0;
     padding: 0;
@@ -13,14 +13,13 @@ body {
     background: #0a0a0a;
     color: #d4af37;
     min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
-/* ===== Subtle Background Texture (Velvet / Marble) ===== */
+/* ===== Background ===== */
 body::before {
     content: '';
     position: fixed;
@@ -33,36 +32,17 @@ body::before {
     pointer-events: none;
 }
 
-/* ===== Subtle Gold Particle Glow ===== */
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(212,175,55,0.15), transparent),
-        radial-gradient(1px 1px at 30% 60%, rgba(212,175,55,0.10), transparent),
-        radial-gradient(1.5px 1.5px at 70% 40%, rgba(212,175,55,0.12), transparent),
-        radial-gradient(1px 1px at 90% 80%, rgba(212,175,55,0.08), transparent),
-        radial-gradient(1px 1px at 50% 10%, rgba(212,175,55,0.10), transparent);
-    background-size: 400px 400px, 300px 300px, 500px 500px, 350px 350px, 450px 450px;
-    background-repeat: repeat;
-    opacity: 0.6;
-}
-
 /* ===== Container ===== */
 .container {
     max-width: 1300px;
     width: 100%;
-    padding: 30px 40px;
+    padding: 20px 30px;
 }
 
 /* ===== Header ===== */
 header {
     text-align: center;
     padding: 10px 0 30px;
-    position: relative;
 }
 
 .logo {
@@ -87,7 +67,6 @@ h1:hover {
     text-shadow: 0 0 80px rgba(212, 175, 55, 0.35), 0 0 160px rgba(212, 175, 55, 0.12);
 }
 
-/* ===== Minimal Panther Mark ===== */
 .panther-mark {
     position: absolute;
     top: -6px;
@@ -208,7 +187,8 @@ h1:hover {
 }
 
 /* ===== Inputs ===== */
-input[type="text"] {
+input[type="text"],
+.birthdate input {
     width: 100%;
     padding: 16px 20px;
     font-family: 'Cormorant Garamond', serif;
@@ -222,7 +202,8 @@ input[type="text"] {
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+.birthdate input:focus {
     outline: none;
     border-color: rgba(212, 175, 55, 0.4);
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.04);
@@ -274,25 +255,6 @@ input[type="text"]::placeholder {
 
 .birthdate {
     width: 100%;
-}
-
-.birthdate input {
-    width: 100%;
-    padding: 14px 18px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1em;
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 6px;
-    color: #d4af37;
-    text-align: center;
-    letter-spacing: 2px;
-    transition: border-color 0.4s ease;
-}
-
-.birthdate input:focus {
-    outline: none;
-    border-color: rgba(212, 175, 55, 0.4);
 }
 
 .birthdate small {
@@ -349,7 +311,6 @@ button:hover {
     font-style: italic;
 }
 
-/* ===== Result Typography ===== */
 .result-box h3 {
     font-family: 'Cinzel', serif;
     font-size: 2em;
