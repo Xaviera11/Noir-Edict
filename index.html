@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Divine Name Oracle</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>DIVINE NAME ORACLE</h1>
+                <div class="leopard-spots"></div>
+            </div>
+            <p style="color: #FFD700; font-style: italic; margin-top: 5px;">
+                Unlock the meaning, origin &amp; destiny of your name
+            </p>
+        </header>
+
+        <main>
+            <div class="hero-section">
+                <!-- Character / mascot -->
+                <div class="character">
+                    <div class="lady-panther"></div>
+                </div>
+
+                <!-- Search area -->
+                <div class="search-container">
+                    <h2>🐾 What's Your True Name?</h2>
+                    <div class="search-box">
+                        <input type="text" id="fullName" placeholder="Enter your full name..." />
+
+                        <div class="gender-select">
+                            <label>
+                                <input type="radio" name="gender" value="female" checked />
+                                🧡 Female
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" value="male" />
+                                💙 Male
+                            </label>
+                        </div>
+
+                        <div class="birthdate">
+                            <input type="date" id="birthDate" />
+                            <small>Optional – adds Life Path Number</small>
+                        </div>
+
+                        <button onclick="revealPath()">🔮 REVEAL MY PATH</button>
+                    </div>
+
+                    <div id="result" class="result-box">
+                        <p style="color: #aaa; font-style: italic;">
+                            Your divine reading will appear here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>🐆 Your name is your first gift – let it speak your destiny 🐆</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
