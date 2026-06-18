@@ -1,69 +1,429 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aurelius – Name & Destiny Oracle</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Google Fonts: Cinzel + Cormorant Garamond -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <h1>AURELIUS</h1>
-                <div class="panther-mark"></div>
-            </div>
-            <p class="tagline">Unlock the meaning, origin &amp; destiny of your name</p>
-        </header>
+/* ===== Import Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
-        <main>
-            <div class="hero-section">
-                <!-- Sleek Panther -->
-                <div class="character">
-                    <div class="aurelius-panther"></div>
-                </div>
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-                <!-- Search -->
-                <div class="search-container">
-                    <h2>What's Your True Name?</h2>
-                    <div class="search-box">
-                        <input type="text" id="fullName" placeholder="Enter your full name..." />
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: #0a0a0a;
+    color: #d4af37;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
 
-                        <div class="gender-select">
-                            <label>
-                                <input type="radio" name="gender" value="female" checked />
-                                Female
-                            </label>
-                            <label>
-                                <input type="radio" name="gender" value="male" />
-                                Male
-                            </label>
-                        </div>
+/* ===== Background ===== */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(20, 20, 20, 0.9) 0%, #0a0a0a 100%);
+    pointer-events: none;
+}
 
-                        <div class="birthdate">
-                            <input type="date" id="birthDate" />
-                            <small>Optional – Life Path Number &amp; Star Sign</small>
-                        </div>
+/* ===== Container ===== */
+.container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 20px 30px;
+}
 
-                        <button onclick="revealPath()">Reveal Your Path</button>
-                    </div>
+/* ===== Header ===== */
+header {
+    text-align: center;
+    padding: 10px 0 30px;
+}
 
-                    <div id="result" class="result-box">
-                        <p class="placeholder">
-                            Your divine reading will appear here.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </main>
+.logo {
+    position: relative;
+    display: inline-block;
+    padding: 0 50px;
+}
 
-        <footer>
-            <p>Your name is your first gift – let it speak your destiny</p>
-        </footer>
-    </div>
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4.8em;
+    font-weight: 900;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    margin: 0;
+    color: #d4af37;
+    text-shadow: 0 0 60px rgba(212, 175, 55, 0.25), 0 0 120px rgba(212, 175, 55, 0.08);
+    transition: text-shadow 0.6s ease;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+h1:hover {
+    text-shadow: 0 0 80px rgba(212, 175, 55, 0.35), 0 0 160px rgba(212, 175, 55, 0.12);
+}
+
+.panther-mark {
+    position: absolute;
+    top: -6px;
+    right: -20px;
+    width: 36px;
+    height: 50px;
+    background: #d4af37;
+    opacity: 0.3;
+    clip-path: polygon(
+        0% 40%, 15% 15%, 30% 0%, 50% 8%,
+        70% 0%, 85% 15%, 100% 40%,
+        90% 65%, 75% 85%, 60% 100%,
+        40% 100%, 25% 85%, 10% 65%
+    );
+    transition: opacity 0.4s ease;
+}
+
+.logo:hover .panther-mark {
+    opacity: 0.6;
+}
+
+.tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15em;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: #b8963b;
+    margin-top: 6px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* ===== Hero ===== */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0 40px;
+}
+
+/* ===== Panther ===== */
+.character {
+    flex: 0 0 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aurelius-panther {
+    width: 280px;
+    height: 380px;
+    background: radial-gradient(ellipse at 50% 70%, #181818 0%, #0a0a0a 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.2);
+    border-radius: 40% 40% 20% 20% / 60% 60% 20% 20%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(212, 175, 55, 0.04), inset 0 0 80px rgba(212, 175, 55, 0.02);
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.aurelius-panther:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 100px rgba(212, 175, 55, 0.06), inset 0 0 80px rgba(212, 175, 55, 0.04);
+}
+
+.aurelius-panther::before {
+    content: '🐆';
+    font-size: 110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.10));
+    opacity: 0.85;
+    transition: opacity 0.5s ease, transform 0.6s ease;
+}
+
+.aurelius-panther:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(-1) scale(1.02);
+}
+
+.aurelius-panther::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: linear-gradient(to top, rgba(212, 175, 55, 0.06), transparent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    pointer-events: none;
+}
+
+/* ===== Search ===== */
+.search-container {
+    flex: 1;
+    text-align: center;
+    max-width: 520px;
+}
+
+.search-container h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6em;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+/* ===== Inputs ===== */
+input[type="text"],
+.birthdate input {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 6px;
+    color: #d4af37;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+input[type="text"]:focus,
+.birthdate input:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.04);
+}
+
+input[type="text"]::placeholder {
+    color: #666;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+.gender-select {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.gender-select label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05em;
+    letter-spacing: 2px;
+    color: #b8963b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.gender-select label:hover {
+    color: #d4af37;
+}
+
+.gender-select input[type="radio"] {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #b8963b;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.gender-select input[type="radio"]:checked {
+    background: #d4af37;
+    border-color: #d4af37;
+}
+
+.birthdate {
+    width: 100%;
+}
+
+.birthdate small {
+    display: block;
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    font-style: italic;
+}
+
+/* ===== Button ===== */
+button {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: #d4af37;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    background: #e8c84a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(212, 175, 55, 0.15);
+}
+
+/* ===== Result ===== */
+.result-box {
+    margin-top: 30px;
+    padding: 30px 24px;
+    border: 1px solid rgba(212, 175, 55, 0.08);
+    border-radius: 6px;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.result-box:hover {
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+.placeholder {
+    color: #555;
+    font-size: 1em;
+    letter-spacing: 2px;
+    font-style: italic;
+}
+
+.result-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2em;
+    letter-spacing: 6px;
+    color: #d4af37;
+    margin: 0 0 16px 0;
+    font-weight: 600;
+}
+
+.name-meaning {
+    text-align: left;
+    padding: 16px 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.06);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+}
+
+.name-part {
+    margin: 10px 0;
+    font-size: 1.05em;
+    letter-spacing: 1px;
+}
+
+.name-part strong {
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.life-path {
+    padding: 14px 0;
+    font-size: 1.05em;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+}
+
+.divine-sentence {
+    padding: 18px 0 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25em;
+    font-style: italic;
+    color: #b8963b;
+    letter-spacing: 1px;
+    line-height: 1.7;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 40px 0 10px;
+}
+
+footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    letter-spacing: 4px;
+    color: #555;
+    font-style: italic;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+    .hero-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .character {
+        flex: 0 0 auto;
+    }
+    .aurelius-panther {
+        width: 200px;
+        height: 280px;
+    }
+    .aurelius-panther::before {
+        font-size: 80px;
+    }
+    .search-container {
+        max-width: 100%;
+    }
+    h1 {
+        font-size: 3.2em;
+        letter-spacing: 8px;
+    }
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2em;
+        letter-spacing: 4px;
+    }
+    .tagline {
+        font-size: 0.9em;
+        letter-spacing: 3px;
+    }
+    .panther-mark {
+        width: 24px;
+        height: 34px;
+        right: -10px;
+        top: -2px;
+    }
+    .aurelius-panther {
+        width: 150px;
+        height: 210px;
+    }
+    .aurelius-panther::before {
+        font-size: 60px;
+    }
+    .gender-select {
+        gap: 20px;
+    }
+    .search-container h2 {
+        font-size: 1.2em;
+        letter-spacing: 4px;
+    }
+}
