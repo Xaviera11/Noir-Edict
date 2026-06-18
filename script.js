@@ -1,4 +1,11 @@
 // ================================================================
+//  NAME MEANING DATABASE (Expanded – 100+ Names)
+//  Add more names as you like (lowercase keys)
+// ================================================================
+
+// This file is now names.js – loaded separately
+
+// ================================================================
 //  MAIN SCRIPT – Aurelius Name Oracle
 // ================================================================
 
@@ -156,7 +163,10 @@ function generateDivineSentence(fullName, gender, lifePathNum, starSign) {
     return sentence;
 }
 
-// REVEAL PATH – Main Function
+// ================================================================
+//  REVEAL PATH – Main Function (Portal Background)
+// ================================================================
+
 async function revealPath() {
     const fullName = document.getElementById('fullName').value.trim();
     const resultDiv = document.getElementById('result');
@@ -165,6 +175,10 @@ async function revealPath() {
         resultDiv.innerHTML = `<p style="color: #b8963b; letter-spacing: 2px;">✦ Please enter your full name, brave soul. ✦</p>`;
         return;
     }
+
+    // Activate portal background
+    const portalBg = document.getElementById('portalBg');
+    portalBg.classList.add('active');
 
     const gender = getGender();
     const birthDateStr = getBirthDate();
