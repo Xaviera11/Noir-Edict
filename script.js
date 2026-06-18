@@ -1,8 +1,9 @@
 // ================================================================
-//  NAME MEANING DATABASE
+//  NAME MEANING DATABASE + HELPER FUNCTIONS
 // ================================================================
+
+// --- Name database (only essential names) ---
 const nameMeanings = {
-    // African / Nguni
     "tsandzile": {
         meaning: "One who brings hope and renewal",
         culture: "Swati / Nguni",
@@ -39,7 +40,7 @@ const nameMeanings = {
         feminine: "A woman of great expectation and promise",
         masculine: "One whose arrival brings new hope"
     },
-    // European / Biblical
+    // Add more names as you like...
     "daniel": {
         meaning: "God is my judge",
         culture: "Hebrew / Biblical",
@@ -57,49 +58,10 @@ const nameMeanings = {
         culture: "Hebrew",
         feminine: "A woman of royal dignity and quiet strength",
         masculine: "A man who honours and protects those around him"
-    },
-    "david": {
-        meaning: "Beloved",
-        culture: "Hebrew / Biblical",
-        feminine: "A woman who is deeply loved and cherished",
-        masculine: "A man of heart, courage, and unwavering faith"
-    },
-    "mary": {
-        meaning: "Bitter / beloved / wished-for child",
-        culture: "Hebrew / Egyptian",
-        feminine: "A woman of deep emotion and compassion",
-        masculine: "A man who carries immense depth and care"
-    },
-    "elizabeth": {
-        meaning: "God is my oath / consecrated to God",
-        culture: "Hebrew",
-        feminine: "A woman of steadfast faith and purpose",
-        masculine: "A man devoted to truth and honour"
-    },
-    // Additional
-    "taylor": {
-        meaning: "Tailor / one who cuts cloth",
-        culture: "English / Old French",
-        feminine: "A woman who shapes her own life",
-        masculine: "A man who crafts his destiny with his hands"
-    },
-    "jordan": {
-        meaning: "To flow down / descend",
-        culture: "Hebrew",
-        feminine: "A woman whose spirit flows like a river",
-        masculine: "A man who moves through life with purpose"
-    },
-    "michelle": {
-        meaning: "Who is like God?",
-        culture: "Hebrew / French",
-        feminine: "A woman of profound strength and grace",
-        masculine: "A man of remarkable depth and presence"
     }
 };
 
-// ================================================================
-//  HELPERS
-// ================================================================
+// --- Helper functions ---
 function getGender() {
     return document.querySelector('input[name="gender"]:checked').value;
 }
@@ -108,9 +70,7 @@ function getBirthDate() {
     return document.getElementById('birthDate').value;
 }
 
-// ================================================================
-//  LIFE PATH NUMBER
-// ================================================================
+// --- Life Path Number ---
 function calculateLifePathNumber(birthDateStr) {
     if (!birthDateStr) return null;
     const digits = birthDateStr.replace(/-/g, '').split('').map(Number);
@@ -138,9 +98,7 @@ function getLifePathDescription(number) {
     return descriptions[number] || "A unique soul on a sacred journey.";
 }
 
-// ================================================================
-//  STAR SIGN
-// ================================================================
+// --- Star Sign ---
 function getStarSign(birthDateStr) {
     if (!birthDateStr) return null;
     const parts = birthDateStr.split('-');
@@ -200,7 +158,28 @@ function getStarSignDescription(sign) {
 }
 
 // ================================================================
-//  NAME LOOKUP
+//  AI CALL
+// ================================================================
+const proxyUrl = "https://script.google.com/macros/s/AKfycby85853OfythS_HnXDZwF1FHlo0pnyyzIXhYw45RTJp-f-L4Fxtnp-spPBBrPj8agL1/exec";
+
+async function callAI(prompt) {
+    try {
+        const response = await fetch(proxyUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+        });
+        const data = await response.json();
+        return data.reply || "Spirit speaks through this name – your path is written in the stars.";
+    } catch (error) {
+        console.error("AI error:", error);
+        return "I'm having trouble connecting to the oracle right now. Please try again later.";
+    }
+}
+
+// ================================================================
+//  LOOKUP & GENERATE FUNCTIONS
 // ================================================================
 function lookupName(namePart) {
     const key = namePart.toLowerCase();
@@ -225,30 +204,6 @@ function lookupName(namePart) {
     };
 }
 
-// ================================================================
-//  AI CALL
-// ================================================================
-const proxyUrl = "https://script.google.com/macros/s/AKfycby85853OfythS_HnXDZwF1FHlo0pnyyzIXhYw45RTJp-f-L4Fxtnp-spPBBrPj8agL1/exec";
-
-async function callAI(prompt) {
-    try {
-        const response = await fetch(proxyUrl, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: prompt })
-        });
-        const data = await response.json();
-        return data.reply || "Spirit speaks through this name – your path is written in the stars.";
-    } catch (error) {
-        console.error("AI error:", error);
-        return "I'm having trouble connecting to the oracle right now. Please try again later.";
-    }
-}
-
-// ================================================================
-//  DIVINE SENTENCE
-// ================================================================
 function generateDivineSentence(fullName, gender, lifePathNum, starSign) {
     const first = fullName.split(/\s+/)[0];
     const genderWord = (gender === 'female') ? 'woman' : 'man';
