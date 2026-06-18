@@ -1,5 +1,5 @@
 // ================================================================
-//  MAIN SCRIPT – DO NOT EDIT BELOW
+//  MAIN SCRIPT – Aurelius Name Oracle
 // ================================================================
 
 // Get gender and birth date from form
