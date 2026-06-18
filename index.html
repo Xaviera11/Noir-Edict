@@ -5,28 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aurelius – Name & Destiny Oracle</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Google Fonts: Cinzel + Cormorant Garamond -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-    <!-- LOAD NAME DATABASE FIRST -->
     <script src="names.js"></script>
-    <!-- THEN MAIN SCRIPT -->
     <script src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <h1>AURELIUS</h1>
-                <div class="panther-mark"></div>
-            </div>
-            <p class="tagline">Unlock the meaning, origin &amp; destiny of your name</p>
-        </header>
-
-        <main>
-            <div class="hero-section">
-                <!-- Sleek Panther -->
-                <div class="character">
-    <div class="portal">
+    <!-- ===== PORTAL BACKGROUND (hidden initially) ===== -->
+    <div id="portalBg" class="portal-bg">
         <div class="portal-ring"></div>
         <div class="portal-ring"></div>
         <div class="portal-ring"></div>
@@ -43,9 +28,20 @@
         <div class="sparkle"></div>
         <div class="sparkle"></div>
     </div>
-</div>
+
+    <div class="container" id="mainContainer">
+        <header>
+            <div class="logo">
+                <h1>AURELIUS</h1>
+                <div class="panther-mark"></div>
+            </div>
+            <p class="tagline">Unlock the meaning, origin &amp; destiny of your name</p>
+        </header>
+
+        <main>
+            <div class="hero-section">
                 <!-- Search -->
-                <div class="search-container">
+                <div class="search-container" id="searchContainer">
                     <h2>What's Your True Name?</h2>
                     <div class="search-box">
                         <input type="text" id="fullName" placeholder="Enter your full name..." />
